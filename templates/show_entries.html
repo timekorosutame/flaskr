@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+{% block body %}
+	{% if session.logged_in %}
+
+		<form action="{{ url_for('add_entry') }}" method="post" class="add-entry">
+			<dl>
+
+				<dt>Name:</dt>
+				<dd>
+					{% if entry_r.name %}
+						<input type="text" name="name" size="20" value="{{ entry_r.name }}">
+					{% else %}
+						<input type="text" name="name" size='20'>
+					{% endif %}
+				</dd>
+				<dt>Title:</dt>
+				<dd>
+					{% if entry_r.title %}
+						<input type="text" name="title" size="30" value="{{ entry_r.title }}">
+					{% else %}
+						<input type="text" name="title" size="30">
+					{% endif %}
+				</dd>
+				<dt>Text:</dt>	
+				<dd>
+					<textarea name="text" rows="5" cols="40">
+						{% if entry_r.text %}
+							{{ entry_r.text }}
+						{% endif %}
+					</textarea>
+				</dd>
+				<dd>
+					<input type="submit" name="Submit" value="Share">
+				</dd>
+								
+			</dl>
+		</form>
+	{% endif %}
+
+	<ul class="entries">
+	{% for entry in incomplete %}
+		<li>
+
+			<h2>
+				{{ entry.title }}
+				<span class="name">
+					({{ entry.name }})
+				</span>
+
+				<a href="{{ url_for('redact', id = entry.id) }}"> redact </a>
+
+				<a href="{{ (url_for('del_entry', id = entry.id)) }}">
+					delete note
+				</a>
+			</h2>
+			<span>{{ entry.text|safe }}</span>
+			
+			<br>
+
+		</li>
+	{% else %}
+		<li><em>Unbelievable.  No entries here so far</em></li>
+	{% endfor %}
+	</ul>
+
+{% endblock %}
