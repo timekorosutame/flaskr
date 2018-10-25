@@ -15,7 +15,7 @@ app.config.from_object(__name__)
 #app.config.from_envvar('FLASKR_SETTINGS', silent = True)
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///schema.sqlite3'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///schema.db'
 
 app.secret_key = SECRET_KEY
 
