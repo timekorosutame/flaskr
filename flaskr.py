@@ -119,7 +119,7 @@ def logout():
 
 
 # очищення бази даних
-delete()
+#delete()
 
 if __name__ == "__main__":
 	db.create_all()
